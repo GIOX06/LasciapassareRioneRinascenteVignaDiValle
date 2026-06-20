@@ -12,19 +12,19 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #ffffff;
-            color: #333333;
+            background-color: #ffffff; 
+            color: #333333; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-sizing: border-box;
         }
         
-        /* MODIFICATO: Immagine più grande e proporzionata per smartphone */
         img {
             width: 100%;
-            max-width: 500px; /* Evita che diventi sproporzionata su PC */
-            height: auto;     /* Rimosso il limite di altezza, ora si adatta naturalmente */
+            max-width: 450px; /* Allineato esattamente alla larghezza del form */
+            height: auto;     
             object-fit: contain;
-            margin-bottom: 25px;
+            display: block;   /* Rimuove lo spazio vuoto di default sotto le immagini */
+            margin-bottom: 0; /* Mette l'immagine a filo con il contenitore sotto */
         }
 
         .modulo-container {
@@ -33,14 +33,16 @@
             background-color: #ffffff;
             padding: 25px;
             border-radius: 12px;
-            border: 2px solid #2e7d32;
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15);
+            border: 2px solid #2e7d32; 
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15); 
+            /* Se c'è ancora un millimetro di bianco dovuto alla foto originale, scommenta la riga sotto: */
+            /* margin-top: -5px; */
         }
         .modulo-container h3 {
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
-            color: #2e7d32;
+            color: #2e7d32; 
             font-size: 22px;
         }
         .messaggio-motivazionale {
@@ -55,7 +57,7 @@
             margin-top: 15px;
             font-size: 14px;
             font-weight: bold;
-            color: #2e7d32;
+            color: #2e7d32; 
         }
         input, textarea {
             width: 100%;
@@ -70,7 +72,7 @@
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #2e7d32;
+            border-color: #2e7d32; 
             background-color: #ffffff;
         }
         textarea {
@@ -81,7 +83,7 @@
             width: 100%;
             padding: 14px;
             margin-top: 25px;
-            background-color: #2e7d32;
+            background-color: #2e7d32; 
             color: #ffffff;
             border: none;
             border-radius: 6px;
@@ -91,10 +93,10 @@
             transition: background 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #1b5e20;
+            background-color: #1b5e20; 
         }
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.98); 
         }
         #messaggio-stato {
             margin-top: 15px;
