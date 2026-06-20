@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rione - Immagine e Registro Firme</title>
+    <title>Rione Rinascente - Registro Firme</title>
     <style>
         body {
             margin: 0;
@@ -12,142 +12,162 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #121212; /* Sfondo scuro coordinato */
-            color: #ffffff;
-            font-family: sans-serif;
+            background-color: #ffffff; /* Sfondo bianco: fa scomparire il bordo della foto! */
+            color: #333333; /* Testo scuro per ottima leggibilità */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-sizing: border-box;
         }
         img {
             max-width: 90%;
             max-height: 45vh;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            /* Rimosso il box-shadow per un effetto carta perfettamente fuso con lo sfondo */
             margin-bottom: 25px;
         }
         .modulo-container {
             width: 90%;
-            max-width: 400px;
-            background-color: #1e1e1e;
+            max-width: 450px;
+            background-color: #ffffff;
             padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 2px solid #2e7d32; /* Bordo verde Rione */
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15); /* Ombra leggera verde */
         }
         .modulo-container h3 {
             margin-top: 0;
+            margin-bottom: 10px;
             text-align: center;
-            color: #ffca28;
+            color: #2e7d32; /* Verde scuro elegante */
+            font-size: 22px;
+        }
+        .messaggio-motivazionale {
+            text-align: center;
+            font-size: 15px;
+            color: #555555;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
         label {
             display: block;
-            margin-top: 12px;
+            margin-top: 15px;
             font-size: 14px;
-            color: #bbb;
+            font-weight: bold;
+            color: #2e7d32; /* Etichette verdi */
         }
         input, textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-top: 5px;
-            border: 1px solid #333;
-            border-radius: 4px;
-            background-color: #2a2a2a;
-            color: white;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            color: #333333;
             box-sizing: border-box;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2e7d32; /* Bordo verde quando si scrive */
+            background-color: #ffffff;
         }
         textarea {
             resize: vertical;
-            height: 80px;
+            height: 90px;
         }
         button {
             width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #ffca28;
-            color: #121212;
+            padding: 14px;
+            margin-top: 25px;
+            background-color: #2e7d32; /* Bottone Verde */
+            color: #ffffff;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #ffe082;
+            background-color: #1b5e20; /* Verde più scuro al passaggio del mouse */
+        }
+        button:active {
+            transform: scale(0.98); /* Piccolo effetto click */
         }
         #messaggio-stato {
             margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 12px;
+            border-radius: 6px;
             text-align: center;
             font-size: 14px;
+            font-weight: bold;
             display: none;
         }
     </style>
 </head>
 <body>
 
-    <img src="foto.jpeg" alt="Immagine in evidenza">
+    <img src="foto.jpeg" alt="Lasciapassare del Rione">
 
     <div class="modulo-container">
-        <h3>Lascia un pensiero per il Rione</h3>
+        <h3>Costruiamo insieme il futuro!</h3>
+        <p class="messaggio-motivazionale">
+            La forza del Rione sono le persone. Lascia il tuo contatto per restare aggiornato e aiutaci a rendere le prossime edizioni ancora più memorabili. Ogni idea conta!
+        </p>
         
         <form id="form-firme">
-            <label for="nome">Nome o Soprannome:</label>
-            <input type="text" id="nome" name="nome" required placeholder="Es. Mario">
+            <label for="nome">Nome e Contatto (Email o Telefono):</label>
+            <input type="text" id="nome" name="nome" required placeholder="Es. Mario Rossi - mario@email.com">
 
-            <label for="messaggio">Il tuo pensiero o firma:</label>
-            <textarea id="messaggio" name="messaggio" required placeholder="Scrivi qui..."></textarea>
+            <label for="messaggio">Aiutaci a migliorare, lascia il tuo pensiero:</label>
+            <textarea id="messaggio" name="messaggio" required placeholder="Cosa ti è piaciuto di più? Cosa vorresti vedere la prossima volta?"></textarea>
 
-            <button type="submit" id="btn-invia">Invia Messaggio</button>
+            <button type="submit" id="btn-invia">Invia al Rione</button>
         </form>
 
         <div id="messaggio-stato"></div>
     </div>
 
     <script>
-        // Sostituisci questa stringa con l'URL ottenuto dalla distribuzione di Apps Script
-        const URL_APPS_SCRIPT = https://script.google.com/macros/s/AKfycby8IRPy_tWKXTJSMSv3JFMI86H-NfGwgckXRhC1yYAzpHPR6VteFQs9aq07rdwe1JhDLA/exec;
+        // Ho aggiunto le virgolette "" che mancavano attorno al link, fondamentali per il Javascript!
+        const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycby8IRPy_tWKXTJSMSv3JFMI86H-NfGwgckXRhC1yYAzpHPR6VteFQs9aq07rdwe1JhDLA/exec";
 
         document.getElementById('form-firme').addEventListener('submit', function(e) {
-            e.preventDefault(); // Blocca l'invio nativo che ricaricherebbe la pagina
+            e.preventDefault(); 
             
             const btn = document.getElementById('btn-invia');
             const stato = document.getElementById('messaggio-stato');
             
-            // Disabilita l'interfaccia durante la trasmissione
             btn.disabled = true;
             btn.innerText = "Invio in corso...";
             stato.style.display = "none";
 
-            // Impacchetta i dati del form
             const formData = new FormData(this);
             const dataInviata = new URLSearchParams(formData);
 
-            // Spedizione asincrona dei dati verso l'infrastruttura Google
             fetch(URL_APPS_SCRIPT, {
                 method: 'POST',
-                mode: 'no-cors', // Evita il blocco di sicurezza cross-origin sui redirect di Google
+                mode: 'no-cors', 
                 body: dataInviata
             })
             .then(() => {
-                // Con la modalità no-cors l'esito viene assunto positivo se non avvengono errori di rete
                 stato.style.display = "block";
-                stato.style.backgroundColor = "#2e7d32"; // Notifica visiva di successo
-                stato.style.color = "#ffffff";
-                stato.innerHTML = "Grazie! Il tuo pensiero è stato registrato nel foglio.";
-                document.getElementById('form-firme').reset(); // Svuota il form
+                stato.style.backgroundColor = "#e8f5e9"; // Verde chiarissimo
+                stato.style.color = "#2e7d32"; // Testo verde scuro
+                stato.style.border = "1px solid #2e7d32";
+                stato.innerHTML = "Grazie per il tuo contributo! Il tuo messaggio è arrivato.";
+                document.getElementById('form-firme').reset(); 
             })
             .catch(error => {
                 console.error('Errore durante la fetch:', error);
                 stato.style.display = "block";
-                stato.style.backgroundColor = "#c62828"; // Notifica visiva di fallimento
-                stato.style.color = "#ffffff";
+                stato.style.backgroundColor = "#ffebee";
+                stato.style.color = "#c62828";
+                stato.style.border = "1px solid #c62828";
                 stato.innerHTML = "Si è verificato un errore di connessione. Riprova.";
             })
             .finally(() => {
-                // Ripristina lo stato operativo del pulsante
                 btn.disabled = false;
-                btn.innerText = "Invia Messaggio";
+                btn.innerText = "Invia al Rione";
             });
         });
     </script>
