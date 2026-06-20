@@ -12,32 +12,35 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #ffffff; /* Sfondo bianco: fa scomparire il bordo della foto! */
-            color: #333333; /* Testo scuro per ottima leggibilità */
+            background-color: #ffffff;
+            color: #333333;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-sizing: border-box;
         }
+        
+        /* MODIFICATO: Immagine più grande e proporzionata per smartphone */
         img {
-            max-width: 90%;
-            max-height: 45vh;
+            width: 100%;
+            max-width: 500px; /* Evita che diventi sproporzionata su PC */
+            height: auto;     /* Rimosso il limite di altezza, ora si adatta naturalmente */
             object-fit: contain;
-            /* Rimosso il box-shadow per un effetto carta perfettamente fuso con lo sfondo */
             margin-bottom: 25px;
         }
+
         .modulo-container {
             width: 90%;
             max-width: 450px;
             background-color: #ffffff;
             padding: 25px;
             border-radius: 12px;
-            border: 2px solid #2e7d32; /* Bordo verde Rione */
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15); /* Ombra leggera verde */
+            border: 2px solid #2e7d32;
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15);
         }
         .modulo-container h3 {
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
-            color: #2e7d32; /* Verde scuro elegante */
+            color: #2e7d32;
             font-size: 22px;
         }
         .messaggio-motivazionale {
@@ -52,7 +55,7 @@
             margin-top: 15px;
             font-size: 14px;
             font-weight: bold;
-            color: #2e7d32; /* Etichette verdi */
+            color: #2e7d32;
         }
         input, textarea {
             width: 100%;
@@ -67,7 +70,7 @@
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #2e7d32; /* Bordo verde quando si scrive */
+            border-color: #2e7d32;
             background-color: #ffffff;
         }
         textarea {
@@ -78,7 +81,7 @@
             width: 100%;
             padding: 14px;
             margin-top: 25px;
-            background-color: #2e7d32; /* Bottone Verde */
+            background-color: #2e7d32;
             color: #ffffff;
             border: none;
             border-radius: 6px;
@@ -88,10 +91,10 @@
             transition: background 0.2s, transform 0.1s;
         }
         button:hover {
-            background-color: #1b5e20; /* Verde più scuro al passaggio del mouse */
+            background-color: #1b5e20;
         }
         button:active {
-            transform: scale(0.98); /* Piccolo effetto click */
+            transform: scale(0.98);
         }
         #messaggio-stato {
             margin-top: 15px;
@@ -128,7 +131,6 @@
     </div>
 
     <script>
-        // Ho aggiunto le virgolette "" che mancavano attorno al link, fondamentali per il Javascript!
         const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycby8IRPy_tWKXTJSMSv3JFMI86H-NfGwgckXRhC1yYAzpHPR6VteFQs9aq07rdwe1JhDLA/exec";
 
         document.getElementById('form-firme').addEventListener('submit', function(e) {
@@ -151,8 +153,8 @@
             })
             .then(() => {
                 stato.style.display = "block";
-                stato.style.backgroundColor = "#e8f5e9"; // Verde chiarissimo
-                stato.style.color = "#2e7d32"; // Testo verde scuro
+                stato.style.backgroundColor = "#e8f5e9"; 
+                stato.style.color = "#2e7d32"; 
                 stato.style.border = "1px solid #2e7d32";
                 stato.innerHTML = "Grazie per il tuo contributo! Il tuo messaggio è arrivato.";
                 document.getElementById('form-firme').reset(); 
