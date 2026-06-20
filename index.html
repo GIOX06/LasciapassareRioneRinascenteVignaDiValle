@@ -3,29 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La mia Immagine</title>
+    <title>Rione - Immagine e Registro Firme</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #121212; /* Sfondo scuro elegante */
+            background-color: #121212; /* Sfondo scuro coordinato */
+            color: #ffffff;
+            font-family: sans-serif;
+            box-sizing: border-box;
         }
         img {
             max-width: 90%;
-            max-height: 90vh;
+            max-height: 45vh;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
+        .modulo-container {
+            width: 90%;
+            max-width: 400px;
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .modulo-container h3 {
+            margin-top: 0;
+            text-align: center;
+            color: #ffca28;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #bbb;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #2a2a2a;
+            color: white;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #ffca28;
+            color: #121212;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #ffe082;
+        }
+        #messaggio-stato {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <img src="foto.jpeg" alt="Immagine in evidenza">
+    <img src="foto.jpg" alt="Immagine in evidenza">
+
+    <div class="modulo-container">
+        <h3>Lascia un pensiero per il Rione</h3>
+        
+        <form id="form-firme">
+            <label for="nome">Nome o Soprannome:</label>
+            <input type="text" id="nome" name="nome" required placeholder="Es. Mario">
+
+            <label for="messaggio">Il tuo pensiero o firma:</label>
+            <textarea id="messaggio" name="messaggio" required placeholder="Scrivi qui..."></textarea>
+
+            <button type="submit" id="btn-invia">Invia Messaggio</button>
+        </form>
+
+        <div id="messaggio-stato"></div>
+    </div>
+
+    <script>
+        // Sostituisci questa stringa con l'URL ottenuto dalla distribuzione di Apps Script
+        const URL_APPS_SCRIPT = https://script.google.com/macros/s/AKfycby8IRPy_tWKXTJSMSv3JFMI86H-NfGwgckXRhC1yYAzpHPR6VteFQs9aq07rdwe1JhDLA/exec;
+
+        document.getElementById('form-firme').addEventListener('submit', function(e) {
+            e.preventDefault(); // Blocca l'invio nativo che ricaricherebbe la pagina
+            
+            const btn = document.getElementById('btn-invia');
+            const stato = document.getElementById('messaggio-stato');
+            
+            // Disabilita l'interfaccia durante la trasmissione
+            btn.disabled = true;
+            btn.innerText = "Invio in corso...";
+            stato.style.display = "none";
+
+            // Impacchetta i dati del form
+            const formData = new FormData(this);
+            const dataInviata = new URLSearchParams(formData);
+
+            // Spedizione asincrona dei dati verso l'infrastruttura Google
+            fetch(URL_APPS_SCRIPT, {
+                method: 'POST',
+                mode: 'no-cors', // Evita il blocco di sicurezza cross-origin sui redirect di Google
+                body: dataInviata
+            })
+            .then(() => {
+                // Con la modalità no-cors l'esito viene assunto positivo se non avvengono errori di rete
+                stato.style.display = "block";
+                stato.style.backgroundColor = "#2e7d32"; // Notifica visiva di successo
+                stato.style.color = "#ffffff";
+                stato.innerHTML = "Grazie! Il tuo pensiero è stato registrato nel foglio.";
+                document.getElementById('form-firme').reset(); // Svuota il form
+            })
+            .catch(error => {
+                console.error('Errore durante la fetch:', error);
+                stato.style.display = "block";
+                stato.style.backgroundColor = "#c62828"; // Notifica visiva di fallimento
+                stato.style.color = "#ffffff";
+                stato.innerHTML = "Si è verificato un errore di connessione. Riprova.";
+            })
+            .finally(() => {
+                // Ripristina lo stato operativo del pulsante
+                btn.disabled = false;
+                btn.innerText = "Invia Messaggio";
+            });
+        });
+    </script>
 
 </body>
 </html>
