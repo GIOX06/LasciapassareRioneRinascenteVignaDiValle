@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0 0 40px 0; /* Rimosso il padding laterale per dare spazio totale all'immagine */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -16,26 +16,32 @@
             color: #333333; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-sizing: border-box;
+            overflow-x: hidden; /* FONDAMENTALE: impedisce che il sito "scrolli" a destra e sinistra a causa dello zoom */
         }
         
-        img {
-            width: 100%;
-            max-width: 900px; /* Raddoppiato: da 450px a 900px per renderla enorme su schermi grandi */
+        /* Nuova classe dedicata per l'effetto ZOOM */
+        .immagine-hero {
+            width: 130%; /* Supera i bordi dello schermo del 30% per ingrandire la carta a dismisura */
+            max-width: 900px; 
             height: auto;     
             object-fit: contain;
             display: block;   
-            margin-bottom: 0; /* Mantiene l'immagine a filo con il modulo sotto */
+            margin-left: -15%; /* Ricentra l'immagine ingrandita */
+            margin-right: -15%;
+            margin-bottom: 15px; /* Un po' di respiro prima del form */
         }
 
         .modulo-container {
             width: 90%;
-            max-width: 450px; /* Mantiene il form compatto e facile da compilare */
+            max-width: 450px;
             background-color: #ffffff;
             padding: 25px;
             border-radius: 12px;
             border: 2px solid #2e7d32; 
             box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15); 
+            z-index: 2; /* Assicura che il form stia sempre sopra l'immagine in caso di sovrapposizioni */
         }
+        
         .modulo-container h3 {
             margin-top: 0;
             margin-bottom: 10px;
@@ -67,6 +73,7 @@
             color: #333333;
             box-sizing: border-box;
             font-family: inherit;
+            font-size: 16px; /* Aumentato a 16px per evitare che gli iPhone facciano auto-zoom sui campi di testo */
         }
         input:focus, textarea:focus {
             outline: none;
@@ -109,7 +116,8 @@
 </head>
 <body>
 
-    <img src="foto.jpeg" alt="Lasciapassare del Rione">
+    <!-- Il ?v=2 inganna la cache del telefono e lo costringe ad aggiornare! -->
+    <img src="foto.jpeg?v=2" alt="Lasciapassare del Rione" class="immagine-hero">
 
     <div class="modulo-container">
         <h3>Costruiamo insieme il futuro!</h3>
